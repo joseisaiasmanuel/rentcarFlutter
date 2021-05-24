@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rentcar/screen/bottom_nav_screen.dart';
 import 'package:rentcar/screen/person_screen.dart';
 
 

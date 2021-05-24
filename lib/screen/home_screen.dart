@@ -97,14 +97,13 @@ class _HomeScreenState extends State<HomeScreen> {
         height: 200,
         child: PageView(
           children: <Widget>[
-            Image.asset(
-                "assets/images/WhatsApp Image 2021-05-12 at 17.03.54.jpeg"),
-            Image.asset("assets/images/img1.jpeg"),
-            Image.asset("assets/images/img2.jpeg"),
-            Image.asset("assets/images/img3.jpeg"),
-            Image.asset("assets/images/img4.jpeg"),
-            Image.asset("assets/images/img5.jpeg"),
-            Image.asset("assets/images/img7.jpeg"),
+          
+            Image.asset("assets/images/img1.png"),
+            Image.asset("assets/images/img2.png"),
+            Image.asset("assets/images/img3.png"),
+            Image.asset("assets/images/img4.png"),
+            Image.asset("assets/images/img5.png"),
+            Image.asset("assets/images/img6.png"),
           ],
         ),
       ),
@@ -195,8 +194,8 @@ class _HomeScreenState extends State<HomeScreen> {
       child: GridView(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       children: [
-      Image.asset("assets/images/img1.jpeg"),
-      Image.asset("assets/images/img2.jpeg"),
+        Image.asset("assets/images/img1.png"),
+        Image.asset("assets/images/img2.png"),
       ],
 
       ),
