@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   String _validatePassword(String value) {
-    if(value.length < 3){
+    if(value.length < 9){
       return 'A senha precisa ter pelo menus 3 caracter';
     }
       return null;                 

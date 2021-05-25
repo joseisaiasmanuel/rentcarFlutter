@@ -97,7 +97,6 @@ class _HomeScreenState extends State<HomeScreen> {
         height: 200,
         child: PageView(
           children: <Widget>[
-          
             Image.asset("assets/images/img1.png"),
             Image.asset("assets/images/img2.png"),
             Image.asset("assets/images/img3.png"),
