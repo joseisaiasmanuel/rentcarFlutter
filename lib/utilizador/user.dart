@@ -14,7 +14,7 @@ String senha;
 DateTime dataNascimento;
 String foto;
 String token;
-
+User();
 User.fromJson(Map<String, dynamic>map){
   this.id= map["id"];
   this.nome= map["nome"];
@@ -75,7 +75,8 @@ User.fromJSONLocal(Map<String, dynamic>map){
 
 
 
-User(this.nome,this.email);
+ 
+
   @override
   String toString() {
     return "User(id: $id, nome: $nome, genero: $genero bilhete: $bilhete, email $email, dataNascimento: $dataNascimento, telefone: $telefone, foto: $foto, token: $token, senha:$senha)";

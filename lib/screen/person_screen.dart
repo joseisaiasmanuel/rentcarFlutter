@@ -1,11 +1,15 @@
 
 import 'package:flutter/material.dart';
+import 'package:rentcar/helper/api_responce.dart';
+import 'package:rentcar/screen/home_screen.dart';
 import 'package:rentcar/screen/sign_screen.dart';
-import 'package:rentcar/utilizador/user_name.dart';
 import 'package:rentcar/utilizador/user.dart';
+import 'package:rentcar/utilizador/user_manager.dart';
 import 'package:rentcar/widgets/appButton.dart';
 import 'package:rentcar/widgets/appTextForm.dart';
-import 'bottom_nav_screen.dart';
+import 'package:rentcar/widgets/messenger.dart';
+import 'package:rentcar/widgets/navegacao.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -70,8 +74,8 @@ class _LoginPageState extends State<LoginPage> {
               children: [
 
                 AppText(
-                   'Nome', 
-                   'Digite seu Nome', 
+                   'Email', 
+                   'Digite seu email', 
                     controller:_nomeController, 
                     validator: _validateNome, 
                     keyboardType: TextInputType.text, 
@@ -114,8 +118,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   String _validatePassword(String value) {
-    if(value.length < 9){
-      return 'A senha precisa ter pelo menus 3 caracter';
+    if(value.length < 6){
+      return 'A senha precisa ter pelo menus 6 caracter';
     }
       return null;                 
   }
@@ -125,21 +129,22 @@ class _LoginPageState extends State<LoginPage> {
          return;
      }
 
-     String login=_nomeController.text;
+     String email=_nomeController.text;
      String senha=_senhaControler.text;
 
 
-     User usuario = await LoginUser.login(login,senha);
+       ApiResponse apiResponse =
+        await context.read<UserManager>().login(email, senha);
 
-     if(usuario!= null){
-        Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => BottomNavBar()));
-         print("$usuario");
-
-     }else{
-       print("Login errado");
-       
-     }
+      if (apiResponse.ok) {
+      User user = apiResponse.result;
+      if (user != null) {
+          push(context, HomeScreen(), replace: true);
+        return;
+      }
+    } else {
+      messenger(context, apiResponse.msg, error: true);
+    }
 
 
   }

@@ -5,7 +5,7 @@ class AppText extends StatelessWidget {
 
   AppText(
   this.label, this.hint, {this.password = false, this.controller, 
-  this.validator, this.keyboardType, this.focusNode, this.nextFocus, 
+  this.validator, this.keyboardType, this.focusNode, this.onSaved,this.nextFocus, 
   this.textInputAction}
   );
 
@@ -18,6 +18,7 @@ class AppText extends StatelessWidget {
   TextInputAction textInputAction;
   FocusNode focusNode;
   FocusNode nextFocus;
+  FormFieldSetter<String> onSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,7 @@ class AppText extends StatelessWidget {
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       focusNode: focusNode,
+      onSaved: onSaved,
       onFieldSubmitted: (String text){
         if(nextFocus != null){
           FocusScope.of(context).requestFocus(nextFocus);         
