@@ -1,33 +1,107 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:rentcar/utilizador/user_manager.dart';
+import 'package:flutter/cupertino.dart';
 
-class LoginUser {
-  static Future<User> login(String login, String senha) async {
-    var url = Uri.parse('http://192.168.42.140:4000/api/cliente/login');
+import 'dart:convert' as convert;
 
-Map<String, String> headers = {"Content-Type": "application/json"};
+import 'package:rentcar/helper/prefs.dart';
+class User extends ChangeNotifier {
+int id;
+String nome;
+String genero;
+String bilhete;
+String telefone;
+String email;
+String senha;
+DateTime dataNascimento;
+String foto;
+String token;
 
-    Map params = {
-      "nome": login,
-      'senha': senha,
-   
-    };
-    String credencias = json.encode(params);
-    
+User.fromJson(Map<String, dynamic>map){
+  this.id= map["id"];
+  this.nome= map["nome"];
+  this.genero= map["genero"];
+  this.bilhete= map["bilhete"];
+  this.telefone= map["telefone"];
+  this.email= map["email"];
+  this.senha= map["senha"];
+  this.dataNascimento= map["dataNascimento"];
+  this.foto= map["foto"];
+  this.token= map["token"];
+}
 
-    var response = await http.post(url, body:credencias, headers:headers);
+User.fromJSONLocal(Map<String, dynamic>map){
+  this.id= map["id"];
+  this.nome= map["nome"];
+  this.genero= map["genero"];
+  this.bilhete= map["bilhete"];
+  this.telefone= map["telefone"];
+  this.email= map["email"];
+  this.senha= map["senha"];
+  this.dataNascimento= map["dataNascimento"];
+  this.foto= map["foto"];
+  this.token= map["token"];
+}
 
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+  Map<String, dynamic> toJson(){
+  final Map<String, dynamic> data = new Map<String, dynamic>();
+  data["id"]=this.id;
+  data["nome"]=this.nome;
+  data["genero"]=this.genero;
+  data["bilhete"]=this.bilhete;
+  data["telefone"]=this.telefone;
+  data["email"]=this.email;
+  data["senha"]=this.senha;
+  data["dataNascimento"]=this.dataNascimento;
+  data["foto"]=this.foto;
+  data["token"]=this.token;
+  
 
-    Map mapResponse = json.decode(response.body);
+}
+  void save() {
+    Map map = toJson();
+    //convertendo objecto/map para String
+    //
+    String json = convert.json.encode(map);
 
-    String nome= mapResponse["nome"];
-    String email= mapResponse["email"];
-
-     final user = User(nome,email);
-
-    return user;
+    Prefs.setString("Cliente.prefs", json);
   }
+
+  void clear() {
+    Prefs.setString("Cliente.prefs", "");
+    notifyListeners();
+  }
+
+
+
+
+
+
+User(this.nome,this.email);
+  @override
+  String toString() {
+    return "User(id: $id, nome: $nome, genero: $genero bilhete: $bilhete, email $email, dataNascimento: $dataNascimento, telefone: $telefone, foto: $foto, token: $token, senha:$senha)";
+  }
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
 }

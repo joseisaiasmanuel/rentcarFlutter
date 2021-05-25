@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:rentcar/screen/sign_screen.dart';
+import 'package:rentcar/utilizador/user_name.dart';
 import 'package:rentcar/utilizador/user.dart';
-import 'package:rentcar/utilizador/user_manager.dart';
 import 'package:rentcar/widgets/appButton.dart';
 import 'package:rentcar/widgets/appTextForm.dart';
 import 'bottom_nav_screen.dart';
