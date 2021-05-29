@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rentcar/screen/person_screen.dart';
+import 'package:rentcar/screen/login_screen.dart';
 import 'package:rentcar/utilizador/user_manager.dart';
 
 

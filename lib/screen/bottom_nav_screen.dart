@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:rentcar/screen/person_screen.dart';
+import 'package:rentcar/screen/login_screen.dart';
 import 'package:rentcar/screen/search_screen.dart';
 import 'package:rentcar/screen/settings_screen.dart';
 import 'package:rentcar/screen/home_screen.dart';

@@ -1,13 +1,11 @@
 import 'dart:convert';
-
-
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:rentcar/helper/api_responce.dart';
 import 'package:rentcar/helper/prefs.dart';
 import 'package:rentcar/utilizador/user.dart';
 import 'package:rentcar/widgets/const.dart';
-import 'package:twilio_flutter/twilio_flutter.dart';
+
 
 class UserManager extends ChangeNotifier {
   UserManager() {
@@ -15,14 +13,14 @@ class UserManager extends ChangeNotifier {
   }
   User user;
   
-  Future<ApiResponse<User>> login(String email, String password) async {
+  Future<ApiResponse<User>> login(String email, String senha) async {
     try {
       var url = '$BASE_URL/cliente/login';
       Map<String, String> headers = {"Content-type": "application/json"};
 
       Map params = {
         'email': email,
-        'password': password,
+        'senha': senha,
         
       };
 
@@ -31,8 +29,10 @@ class UserManager extends ChangeNotifier {
       String credencials = jsonEncode(params);
 
       var response = await http.post(url, body: credencials, headers: headers);
+    
 
       Map mapRensponse = json.decode(response.body);
+        print(mapRensponse);
 
       if (response.statusCode == 200) {
         final client = User.fromJson(mapRensponse);
@@ -51,10 +51,12 @@ class UserManager extends ChangeNotifier {
       return ApiResponse.error("Impossivel fazer login");
     }
   }
+  
 
+  // metodo para cadastrar o usuario 
   Future<ApiResponse<User>> signup(User user) async {
     try {
-      var url = '$BASE_URL/cliente/login';
+      var url = '$BASE_URL/cliente/';
       Map<String, String> headers = {"Content-type": "application/json"};
 
       Map params = {
@@ -63,7 +65,8 @@ class UserManager extends ChangeNotifier {
         'bilhete': user.bilhete,
         'telefone': user.telefone,
         'email': user.email,
-        'password': user.senha,
+        'senha': user.senha,
+        "dataNascimento":"1997/10/26"
         
       
       };
@@ -73,6 +76,7 @@ class UserManager extends ChangeNotifier {
       var response = await http.post(url, body: credencials, headers: headers);
 
       Map mapRensponse = json.decode(response.body);
+      print(response.body);
 
       if (response.statusCode == 200) {
         final client = User.fromJson(mapRensponse);
@@ -93,7 +97,7 @@ class UserManager extends ChangeNotifier {
   }
 
   Future<User> getUser() async {
-    String jsonS = await Prefs.getString("client.prefs");
+    String jsonS = await Prefs.getString("Cliente.prefs");
 
     if (jsonS.isEmpty) {
       return null;

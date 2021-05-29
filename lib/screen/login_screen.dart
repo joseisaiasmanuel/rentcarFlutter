@@ -11,6 +11,8 @@ import 'package:rentcar/widgets/messenger.dart';
 import 'package:rentcar/widgets/navegacao.dart';
 import 'package:provider/provider.dart';
 
+import 'bottom_nav_screen.dart';
+
 
 
 
@@ -22,7 +24,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final _nomeController = TextEditingController();
+  final _emailController = TextEditingController();
 
   final _senhaControler = TextEditingController();
 
@@ -76,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                 AppText(
                    'Email', 
                    'Digite seu email', 
-                    controller:_nomeController, 
+                    controller:_emailController, 
                     validator: _validateNome, 
                     keyboardType: TextInputType.text, 
                     textInputAction: TextInputAction.next,
@@ -113,13 +115,13 @@ class _LoginPageState extends State<LoginPage> {
    String _validateNome(String value) {
      
     if(value.isEmpty )
-        return 'Degete o nome';
+        return 'Degete o seu email';
       return null;                 
   }
 
   String _validatePassword(String value) {
     if(value.length < 6){
-      return 'A senha precisa ter pelo menus 6 caracter';
+      return 'A senha precisa ter pelo menus 6 caracteres';
     }
       return null;                 
   }
@@ -129,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
          return;
      }
 
-     String email=_nomeController.text;
+     String email=_emailController.text;
      String senha=_senhaControler.text;
 
 
@@ -139,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
       if (apiResponse.ok) {
       User user = apiResponse.result;
       if (user != null) {
-          push(context, HomeScreen(), replace: true);
+          push(context, BottomNavBar(), replace: true);
         return;
       }
     } else {

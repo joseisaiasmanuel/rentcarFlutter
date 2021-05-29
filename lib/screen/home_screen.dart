@@ -1,7 +1,9 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:rentcar/screen/person_screen.dart';
+import 'package:rentcar/screen/login_screen.dart';
+import 'package:rentcar/utilizador/user_manager.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+  final user = context.watch<UserManager>().user;
     return Scaffold(
       appBar: AppBar(
         elevation: (0.0),
@@ -20,34 +23,42 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               margin: EdgeInsets.only(bottom: 30, left: 0.0),
               child: _img(),
+              
+            ),
+            Container(
+            margin: EdgeInsetsDirectional.only(top: 30,),
+              child: Text("ola,${user?.nome}"),
             ),
             Container(child: _text()),
             Container(child: _iconButton())
           ],
         ),
       ),
-      body: _body(),
+      body: SingleChildScrollView(
+        child:_body(),
+      )
     );
   }
 
   _img() {
     return Container(
-      margin: EdgeInsets.only(top: 50, left: 0.0),
+        margin: EdgeInsetsDirectional.only(top:50,end:0.0 ),
       height: 33,
       width: 50,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(
-              image: AssetImage(
-                  "assets/images/62451553_2236227886593862_1896978812877406208_n.jpg"))),
+            image: AssetImage("assets/images/62451553_2236227886593862_1896978812877406208_n.jpg")
+           
+              )),
     );
   }
 
   _text() {
     return Container(
-      margin: EdgeInsetsDirectional.only(bottom: 5, start: 140),
+      margin: EdgeInsetsDirectional.only(bottom: 5, start: 68),
       child: Text(
-        "25,000KZ",
+        "100,000KZ",
         style: TextStyle(
             color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16.0),
       ),
@@ -201,4 +212,5 @@ class _HomeScreenState extends State<HomeScreen> {
     );
     
   }
+ 
 }

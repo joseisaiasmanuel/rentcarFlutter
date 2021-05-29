@@ -6,6 +6,11 @@ import 'package:rentcar/utilizador/user.dart';
 import 'package:rentcar/utilizador/user_manager.dart';
 import 'package:rentcar/widgets/appButton.dart';
 import 'package:rentcar/widgets/appTextForm.dart';
+import 'package:rentcar/widgets/messenger.dart';
+import 'package:rentcar/widgets/navegacao.dart';
+
+import 'bottom_nav_screen.dart';
+import 'home_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -145,5 +150,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     _formKey.currentState.save();
     context.read<UserManager>().signup(user);
+  if ( user != null){
+  push(context, BottomNavBar(), replace: true);
+  
+  }else {
+    print("erro ao fazer o cadastro");
+
+  }
+
   }
 }
